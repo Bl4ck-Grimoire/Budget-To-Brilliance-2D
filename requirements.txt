@@ -1,0 +1,9 @@
+# Versions below are the ones the pipeline was tested with (Python 3.12).
+polars==2.0.0
+great-expectations==1.24.0
+pandas==3.0.2          # required by Great Expectations (Polars frames are converted just before validation)
+pyarrow==26.0.0        # required by Polars -> pandas conversion
+numpy==2.4.4
+PyMySQL==1.2.3
+requests==2.33.1
+python-dotenv==1.2.2

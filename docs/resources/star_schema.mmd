@@ -1,0 +1,66 @@
+erDiagram
+    DIM_DEPARTAMENTO ||--o{ DIM_COLEGIO : ubica
+    DIM_ANIO ||--o{ DIM_PERIODO : agrupa
+    DIM_COLEGIO ||--o{ FACT_RESULTADO_SABER11 : describe
+    DIM_GENERO  ||--o{ FACT_RESULTADO_SABER11 : describe
+    DIM_PERIODO ||--o{ FACT_RESULTADO_SABER11 : describe
+    DIM_DEPARTAMENTO ||--o{ FACT_INDICADOR_DEPARTAMENTO : describe
+    DIM_ANIO ||--o{ FACT_INDICADOR_DEPARTAMENTO : describe
+
+    DIM_DEPARTAMENTO {
+        int id_departamento PK
+        string cod_dane_depto UK "2 digitos, ej. 05"
+        string nombre_departamento
+    }
+
+    DIM_ANIO {
+        int id_anio PK
+        int anio UK
+    }
+
+    DIM_COLEGIO {
+        int id_colegio PK
+        int id_departamento FK
+        string cole_codigo_icfes
+        string cole_nombre_establecimiento
+        string cole_naturaleza
+        string cole_jornada
+        string cole_area_ubicacion
+        string cole_depto_ubicacion
+        string cole_mcpio_ubicacion
+    }
+
+    DIM_GENERO {
+        int id_genero PK
+        string estu_genero
+        string genero_descripcion
+    }
+
+    DIM_PERIODO {
+        int id_periodo PK
+        int id_anio FK
+        string periodo
+        int anio
+        int semestre
+    }
+
+    FACT_RESULTADO_SABER11 {
+        string estu_consecutivo PK
+        int id_periodo PK, FK
+        int id_colegio FK
+        int id_genero FK
+        float punt_lectura_critica
+        float punt_matematicas
+        float punt_sociales_ciudadanas
+        float punt_c_naturales
+        float punt_ingles
+        float punt_global
+        boolean puntaje_sospechoso
+    }
+
+    FACT_INDICADOR_DEPARTAMENTO {
+        int id_departamento PK, FK
+        int id_anio PK, FK
+        float desercion_media "porcentaje 0-100, no aditivo"
+        float repitencia_secundaria "porcentaje 0-100, no aditivo"
+    }
